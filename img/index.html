@@ -43,15 +43,60 @@ body{
     background-position-x: 0px;
 }
 
+.dino-corriendo{
+    animation: animarDino 0.25s steps(2) infinite;
+}
+
+.dino-estrellado{
+    background-position-x: -252px;
+}
+
+.suelo{
+    width: 200%;
+    height: 42px;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    background: url(suelo.png) repeat-x 0px 0px;
+    background-size: 50% 42px;
+}
+
+.score{
+    width: 100px;
+    height: 30px;
+
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    z-index: 10;
+
+    color: #D48872;
+    font-family: Verdana;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: right;
+}
+
+@keyframes animarDino{
+    from{
+        background-position-x: -84px;
+    }
+    to{
+        background-position-x: -252px;
+    }
+}
+
     </style>
 </head>
 <body>
    <div class="contenedor">
         <div class="suelo"></div>
 
-        <div class="dino"></div>
+        <div class="dino dino-corriendo"></div>
 
-        <div class="score"></div>
+        <div class="score">0</div>
    </div> 
 </body>
 </html>
