@@ -117,7 +117,7 @@ if(document.readyState === "complete" || document.readyState === "interactive"){
 
 function Init() {
     time = new Date();
-    start();
+    Start();
     Loop();
 }
 
@@ -146,6 +146,12 @@ var score = 0;
 
 var parado = false;
 var saltando = false;
+
+var tiempoHastaObstaculo = 2;
+var tiempoObstaculoMin = 0.7;
+var tiempoObstaculoMax = 1.8;
+var obstaculoPosY = 16;
+var obstaculos = [];
 
 var contenedor;
 var dino;
@@ -181,13 +187,14 @@ function Update() {
 
     MoverSuelo();
     MoverDinoasurio();
+    DecidirCrearObstaculos();
 
     velY -= gravedad * deltaTime;
 }
 
 function MoverSuelo(){
     sueloX += CalcularDesplazamiento();
-    suelo.style.left = -(sueloX % contenedor.clientwidth) + "px";
+    suelo.style.left = -(sueloX % contenedor.clientWidth) + "px";
 }
 
 function CalcularDesplazamiento() {
@@ -211,7 +218,24 @@ function TocarSuelo(){
     saltando = false;
 }
 
+function DecidirCrearObstaculos() {
+    tiempoHastaObstaculo -= deltaTime;
+    if(tiempoHastaObstaculo <= 0){
+        CrearObstaculo();
+    }
+}
 
+function CrearObstaculo() {
+    var obstaculo = document.createElement("div");
+    contenedor.appendChild(obstaculo);
+    obstaculo.classList.add("cactus");
+    obstaculo.posX = contenedor.clientWidth;
+    obstaculo.style.left = contenedor.clientWidth+"px";
+
+    obstaculos.push(obstaculo);
+    tiempoHastaObstaculo = tiempoObstaculoMin + Math.random() *
+    (tiempoObstaculoMax - tiempoObstaculoMin) / gameVel;
+}
     
 </script>
 </body>
